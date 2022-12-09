@@ -1,2 +1,0 @@
-# notion
-Just a test.
