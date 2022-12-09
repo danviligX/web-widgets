@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.css"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+ 
+      body {
+        background: #333;
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
+ 
+      .main {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: roll 5s linear infinite;
+        transform-style: preserve-3d;
+        transform: rotateX(-15deg);
+      }
+ 
+      .main i {
+        font-size: 100px;
+        /* 树泛光的颜色 */
+        text-shadow: 0 0 10px white, 0 0 20px rgb(50, 50, 156);
+        position: absolute;
+        /* 树的颜色 */
+        color: green;
+      }
+ 
+      /* 每片树叶开始旋转的位置 */
+      .main i:nth-child(2) {
+        transform: rotateY(90deg);
+      }
+ 
+      .main i:nth-child(3) {
+        transform: rotateY(45deg);
+      }
+ 
+      .main i:nth-child(4) {
+        transform: rotateY(-45deg);
+      }
+ 
+      @keyframes roll {
+        100% {
+          transform: rotateX(-15deg) rotateY(360deg);
+        }
+      }
+ 
+      .main div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px solid black;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        overflow: hidden;
+      }
+      body {
+        background-size: cover;
+      }
+      h1 {
+        color: #0097e6;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 40px;
+        cursor: default;
+      }
+      canvas {
+        filter: blur(1px);
+      }
+    </style>
+  </head>
+ 
+  <body>
+    <!-- 雪花背景画布 -->
+    <canvas id="canvas"></canvas>
+    <!-- 圣诞树图标 -->
+    <div class="main">
+      <i class="fas fa-tree"></i>
+      <i class="fas fa-tree"></i>
+      <i class="fas fa-tree"></i>
+      <i class="fas fa-tree"></i>
+    </div>
+  </body>
+ 
+  <script type="text/javascript">
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+    //设置雪片数量
+    var num = 200;
+    //定义雪花数组
+    var snows = [];
+    for (var i = 0; i < num; i++) {
+      //向数组填充元素，元素属性有坐标及半径，均为随机生成，其中半径上限为3
+      snows.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 3,
+      });
+    }
+    //绘制图片
+    function draw() {
+      context.clearRect(0, 0, w, h); //清空画布
+      context.beginPath(); //画笔开始
+      for (var i = 0; i < num; i++) {
+        var snow = snows[i];
+        context.fillStyle = "rgba(255,255,255,0.4)"; //设定填充方式为白色半透明
+        context.moveTo(snow.x, snow.y); //画笔移动到指定坐标处
+        context.arc(snow.x, snow.y, snow.r, 0, Math.PI * 2); //根据属性绘制圆形
+      }
+      context.fill(); //填充路径
+      //雪片落下
+      move();
+    }
+    function move() {
+      for (var i = 0; i < num; i++) {
+        var snow = snows[i];
+        snow.y += (7 - snow.r) / 10; //根据雪片大小调整落下速度
+        if (snow.y > h) {
+          //如果雪片超出画布范围，则在顶端重绘
+          snows[i] = { x: Math.random() * w, y: 0, r: snow.r };
+        }
+      }
+    }
+    //执行和调用函数
+    draw();
+    setInterval(draw, 1); //每隔一毫秒重绘一次
+  </script>
+</html>
