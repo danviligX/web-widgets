@@ -227,26 +227,26 @@ for( var i = 0; i < quantity; i++ ) {
 }
  
 // Let it snow
-for( var i = 0; i < 200; i++ ) {
-	let element = document.createElement( 'input' );
-	element.setAttribute( 'type', 'radio' );
+// for( var i = 0; i < 200; i++ ) {
+// 	let element = document.createElement( 'input' );
+// 	element.setAttribute( 'type', 'radio' );
  
-	let spread = window.innerWidth/2;
+// 	let spread = window.innerWidth/2;
  
-	let x = Math.round( Math.random() * spread ) - ( spread / 4 ),
-		y = Math.round( Math.random() * height ),
-		z = Math.round( Math.random() * spread ) - ( spread / 2 );
+// 	let x = Math.round( Math.random() * spread ) - ( spread / 4 ),
+// 		y = Math.round( Math.random() * height ),
+// 		z = Math.round( Math.random() * spread ) - ( spread / 2 );
  
-	let rx = 0,
-		ry = Math.random() * 360,
-		rz = 0;
+// 	let rx = 0,
+// 		ry = Math.random() * 360,
+// 		rz = 0;
  
-	if( Math.random() > 0.5 ) element.setAttribute( 'checked', '' );
+// 	if( Math.random() > 0.5 ) element.setAttribute( 'checked', '' );
  
-	element.style.transform = `translate3d(${x}px, ${y}px, ${z}px) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`;
+// 	element.style.transform = `translate3d(${x}px, ${y}px, ${z}px) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`;
  
-	tree.appendChild( element );
-}
+// 	tree.appendChild( element );
+// }
  
 function resize() {
 	tree.style.top = ( ( window.innerHeight - height - 100 ) / 2 ) + 'px';
